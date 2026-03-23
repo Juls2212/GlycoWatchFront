@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { Bell, RefreshCw } from "lucide-react";
 import Link from "next/link";
 import { cn, formatRelative } from "@/lib/utils";
-import { useUnreadAlertsCount } from "@/features/alerts/hooks/useUnreadAlertsCount";
+import { useUnreadAlertsCount } from "@/hooks/useUnreadAlertsCount";
 
 interface HeaderProps {
   sidebarCollapsed: boolean;

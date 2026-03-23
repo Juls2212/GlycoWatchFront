@@ -4,9 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Activity, ChevronLeft, ChevronRight, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { NAV_SECTIONS } from "@/lib/navigation";
+import { NAV_SECTIONS } from "@/config/navigation";
 import { useAuth } from "@/hooks/useAuth";
-import { useUnreadAlertsCount } from "@/features/alerts/hooks/useUnreadAlertsCount";
+import { useUnreadAlertsCount } from "@/hooks/useUnreadAlertsCount";
 
 interface SidebarProps {
   collapsed:         boolean;
