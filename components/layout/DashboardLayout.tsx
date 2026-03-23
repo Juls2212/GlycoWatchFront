@@ -27,7 +27,7 @@ interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 
-export function DashboardLayout({ children }: DashboardLayoutProps) {
+export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [collapsed,    setCollapsed]    = useState(false);
   const [lastUpdated,  setLastUpdated]  = useState<string | null>(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
