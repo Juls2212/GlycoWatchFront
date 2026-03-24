@@ -7,8 +7,8 @@ import { Mail, Lock } from "lucide-react";
 import { Input }       from "@/components/ui/Input";
 import { Button }      from "@/components/ui/Button";
 import { AlertBanner } from "./AlertBanner";
-import { useLogin, extractAuthError } from "../hooks/useLogin";
-import { loginSchema, type LoginFormValues } from "../schemas/auth.schemas";
+import { useLogin, extractAuthError } from "@/hooks/useLogin";
+import { loginSchema, type LoginFormValues } from "@/schemas/auth.schemas";
 
 export function LoginForm() {
   const login = useLogin();

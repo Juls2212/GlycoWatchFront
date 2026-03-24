@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { AuthLayout } from "@/features/auth/components/AuthLayout";
-import { LoginForm  } from "@/features/auth/components/LoginForm";
-import { LoginSuccessBanner } from "@/features/auth/components/LoginSuccessBanner";
+import { AuthLayout } from "@/components/auth/AuthLayout";
+import { LoginForm  } from "@/components/auth/LoginForm";
+import { LoginSuccessBanner } from "@/components/auth/LoginSuccessBanner";
 
 export const metadata: Metadata = { title: "Iniciar sesión" };
 
