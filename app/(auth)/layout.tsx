@@ -1,22 +1,5 @@
-"use client";
+import { AuthLayout } from "@/components/auth/AuthLayout";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { tokenStorage } from "@/lib/token";
-
-interface AuthGroupLayoutProps {
-  children: React.ReactNode;
-}
-
-export default function AuthGroupLayout({ children }: AuthGroupLayoutProps) {
-  const router = useRouter();
-
-  useEffect(() => {
-    // If already authenticated, redirect away from auth pages
-    if (tokenStorage.hasToken()) {
-      router.replace("/");
-    }
-  }, [router]);
-
-  return <>{children}</>;
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return <AuthLayout>{children}</AuthLayout>;
 }
