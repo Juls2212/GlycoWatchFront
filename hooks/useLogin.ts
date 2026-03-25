@@ -16,9 +16,17 @@ export function useLogin(options?: UseLoginOptions) {
   return useMutation({
     mutationFn: (data: LoginRequestDTO) => authService.login(data),
 
-    onSuccess: () => {
+    onSuccess: (data) => {
+      //---- Save token----
+      if (data?.token) {
+        localStorage.setItem("access_token", data.token);
+      }
+      // tokenStorage.setToken(data.token);
+
       options?.onSuccess?.();
-      router.push("/");
+
+      //---redirección al dashboard---
+      router.push("/dashboard");
     },
 
     onError: (error) => {
