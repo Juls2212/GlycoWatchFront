@@ -1,103 +1,92 @@
 "use client";
 
-import { Bell, AlertTriangle } from "lucide-react";
+import { CheckCircle, AlertTriangle, XCircle, Info } from "lucide-react";
 
 export default function AlertsPage() {
   const alerts = [
     {
       id: 1,
-      title: "Glucose level too high",
-      description: "Your glucose exceeded 180 mg/dL",
-      time: "2 min ago",
-      severity: "high",
+      type: "success",
+      title: "Stable Glucose",
+      message: "Your glucose levels are within the normal range.",
     },
     {
       id: 2,
-      title: "Glucose dropping fast",
-      description: "Rapid decrease detected",
-      time: "10 min ago",
-      severity: "medium",
+      type: "warning",
+      title: "Glucose Rising",
+      message: "Your glucose is increasing faster than usual.",
     },
     {
       id: 3,
-      title: "Stable levels",
-      description: "Everything is under control",
-      time: "30 min ago",
-      severity: "low",
+      type: "error",
+      title: "High Glucose",
+      message: "Your glucose exceeded 180 mg/dL.",
+    },
+    {
+      id: 4,
+      type: "info",
+      title: "New Measurement",
+      message: "A new glucose reading has been recorded.",
     },
   ];
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-white to-red-50 p-6">
-      {/* Header */}
-      <div className="flex items-center gap-3 mb-8">
-        <div className="p-3 bg-red-100 rounded-xl">
-          <Bell className="text-red-500" />
-        </div>
-        <h1 className="text-3xl font-bold text-gray-800">
-          Alerts Center
-        </h1>
-      </div>
+  const styles = {
+    success: {
+      bg: "bg-green-50",
+      border: "border-green-200",
+      text: "text-green-700",
+      icon: <CheckCircle className="text-green-500" />,
+    },
+    warning: {
+      bg: "bg-yellow-50",
+      border: "border-yellow-200",
+      text: "text-yellow-700",
+      icon: <AlertTriangle className="text-yellow-500" />,
+    },
+    error: {
+      bg: "bg-red-50",
+      border: "border-red-200",
+      text: "text-red-700",
+      icon: <XCircle className="text-red-500" />,
+    },
+    info: {
+      bg: "bg-blue-50",
+      border: "border-blue-200",
+      text: "text-blue-700",
+      icon: <Info className="text-blue-500" />,
+    },
+  };
 
-      {/* Alerts */}
-      <div className="grid gap-6">
-        {alerts.map((alert) => (
+  return (
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center pt-10 gap-4">
+      {alerts.map((alert) => {
+        const style = styles[alert.type as keyof typeof styles];
+
+        return (
           <div
             key={alert.id}
-            className="group relative p-5 rounded-2xl bg-white/80 backdrop-blur-lg border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+            className={`w-full max-w-xl flex items-start gap-4 p-4 rounded-xl border shadow-sm ${style.bg} ${style.border}`}
           >
-            {/* Glow effect */}
-            <div
-              className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition ${
-                alert.severity === "high"
-                  ? "bg-red-100/30"
-                  : alert.severity === "medium"
-                  ? "bg-yellow-100/30"
-                  : "bg-green-100/30"
-              }`}
-            />
+            {/* Icon */}
+            <div className="mt-1">{style.icon}</div>
 
-            <div className="relative flex justify-between items-start">
-              <div>
-                <h2 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-                  <AlertTriangle
-                    className={
-                      alert.severity === "high"
-                        ? "text-red-500"
-                        : alert.severity === "medium"
-                        ? "text-yellow-500"
-                        : "text-green-500"
-                    }
-                  />
-                  {alert.title}
-                </h2>
-
-                <p className="text-sm text-gray-500 mt-1">
-                  {alert.description}
-                </p>
-
-                <div className="mt-3">
-                  <span
-                    className={`text-xs px-3 py-1 rounded-full font-medium ${
-                      alert.severity === "high"
-                        ? "bg-red-100 text-red-600"
-                        : alert.severity === "medium"
-                        ? "bg-yellow-100 text-yellow-600"
-                        : "bg-green-100 text-green-600"
-                    }`}
-                  >
-                    {alert.severity.toUpperCase()}
-                  </span>
-                </div>
-              </div>
-
-              <span className="text-xs text-gray-400">
-                {alert.time}
-              </span>
+            {/* Text */}
+            <div className="flex-1">
+              <h2 className={`font-semibold ${style.text}`}>
+                {alert.title}
+              </h2>
+              <p className="text-sm text-gray-600">
+                {alert.message}
+              </p>
             </div>
+
+            {/* Close button */}
+            <button className="text-gray-400 hover:text-gray-600">
+              ✕
+            </button>
           </div>
-        ))}
-      </div>
+        );
+      })}
     </div>
   );
 }
