@@ -1,26 +1,16 @@
-import type { Metadata } from "next";
-import { Suspense } from "react";
 import { AuthLayout } from "@/components/auth/AuthLayout";
-import { LoginForm  } from "@/components/auth/LoginForm";
-import { LoginSuccessBanner } from "@/components/auth/LoginSuccessBanner";
+import { RegisterForm } from "@/components/auth/RegisterForm";
 
-export const metadata: Metadata = { title: "Iniciar sesión" };
-
-export default function LoginPage() {
+export default function RegisterPage() {
   return (
     <AuthLayout
-      title="Bienvenido de vuelta"
-      subtitle="Ingresa tus credenciales para acceder a tu panel"
-      footerText="¿No tienes cuenta?"
-      footerLink="/register"
-      footerLabel="Regístrate gratis"
+      title="Crear cuenta"
+      subtitle="Regístrate para comenzar a monitorear tu glucosa"
+      footerText="¿Ya tienes cuenta?"
+      footerLink="/login"
+      footerLabel="Inicia sesión"
     >
-      {/* Show success banner if coming from register */}
-      <Suspense>
-        <LoginSuccessBanner />
-      </Suspense>
-
-      <LoginForm />
+      <RegisterForm />
     </AuthLayout>
   );
 }

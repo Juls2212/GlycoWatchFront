@@ -35,66 +35,68 @@ export function LoginForm() {
       ? extractAuthError(login.error)
       : null;
 
-  return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      noValidate
-      className="space-y-4"
-      aria-label="Formulario de inicio de sesión"
-    >
-      {/* Error API */}
-      {errorMessage && (
-        <AlertBanner
-          variant="error"
-          message={errorMessage}
-          onDismiss={() => setDismissed(true)}
-        />
-      )}
+ return (
+   <>
+     <form
+       onSubmit={handleSubmit(onSubmit)}
+       noValidate
+       className="space-y-4"
+       aria-label="Formulario de inicio de sesión"
+     >
+       {/* Error API */}
+       {errorMessage && (
+         <AlertBanner
+           variant="error"
+           message={errorMessage}
+           onDismiss={() => setDismissed(true)}
+         />
+       )}
 
-      {/* Email */}
-      <Input
-        {...register("email")}
-        label="Correo electrónico"
-        type="email"
-        placeholder="tu@correo.com"
-        leftIcon={Mail}
-        error={errors.email?.message}
-        autoComplete="email"
-        autoFocus
-      />
+       {/* Email */}
+       <Input
+         {...register("email")}
+         label="Correo electrónico"
+         type="email"
+         placeholder="tu@correo.com"
+         leftIcon={Mail}
+         error={errors.email?.message}
+         autoComplete="email"
+         autoFocus
+       />
 
-      {/* Password */}
-      <Input
-        {...register("password")}
-        label="Contraseña"
-        type="password"
-        placeholder="••••••••"
-        leftIcon={Lock}
-        error={errors.password?.message}
-        autoComplete="current-password"
-      />
+       {/* Password */}
+       <Input
+         {...register("password")}
+         label="Contraseña"
+         type="password"
+         placeholder="••••••••"
+         leftIcon={Lock}
+         error={errors.password?.message}
+         autoComplete="current-password"
+       />
 
-      {/* Submit */}
-      <Button
-        type="submit"
-        fullWidth
-        size="lg"
-        loading={login.isPending || isSubmitting}
-        className="mt-2"
-      >
-        {login.isPending ? "Iniciando sesión..." : "Iniciar sesión"}
-      </Button>
+       {/* Submit */}
+       <Button
+         type="submit"
+         fullWidth
+         size="lg"
+         loading={login.isPending || isSubmitting}
+         className="mt-2"
+       >
+         {login.isPending ? "Iniciando sesión..." : "Iniciar sesión"}
+       </Button>
+     </form>
 
-      {/*REGISTER LINK*/}
-      <p className="text-sm text-center mt-4 text-zinc-600">
-        ¿No tienes cuenta?{" "}
-        <Link
-          href="/register"
-          className="text-primary-600 font-semibold hover:underline"
-        >
-          Regístrate gratis
-        </Link>
-      </p>
-    </form>
-  );
+     {/*REGISTER LINK*/}
+     <p className="text-sm text-center mt-4 text-zinc-600">
+       ¿No tienes cuenta?{" "}
+       <Link
+         href="/register"
+         className="text-primary-600 font-semibold hover:underline"
+       >
+         Regístrate gratis
+       </Link>
+     </p>
+   </>
+ );
 }

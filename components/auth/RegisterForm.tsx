@@ -8,8 +8,8 @@ import { Input }                from "@/components/ui/Input";
 import { Button }               from "@/components/ui/Button";
 import { AlertBanner }          from "./AlertBanner";
 import { PasswordStrengthBar }  from "./PasswordStrengthBar";
-import { useRegister, extractRegisterError } from "../hooks/useRegister";
-import { registerSchema, type RegisterFormValues } from "../schemas/auth.schemas";
+import { useRegister, extractRegisterError } from "../../hooks/useRegister";
+import { registerSchema, type RegisterFormValues } from "@/schemas/auth.schemas";
 
 export function RegisterForm() {
   const register_  = useRegister();
