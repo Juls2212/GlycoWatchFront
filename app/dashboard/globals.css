@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design Tokens ──────────────────────────────────────────────────────── */
+:root {
+  /* Red scale */
+  --red-50:  #FFF5F5;
+  --red-100: #FFE3E3;
+  --red-200: #FFC9C9;
+  --red-400: #FF6B6B;
+  --red-500: #FA5252;
+  --red-600: #E03131;
+  --red-700: #C92A2A;
+  --red-900: #7B1D1D;
+
+  /* Surface */
+  --color-bg:          #F7F7F8;
+  --color-surface:     #FFFFFF;
+  --color-border:      #E9E9EC;
+  --color-border-soft: #F0F0F2;
+
+  /* Text */
+  --color-text:     #18181B;
+  --color-muted:    #71717A;
+  --color-subtle:   #A1A1AA;
+
+  /* Brand */
+  --color-primary:       var(--red-600);
+  --color-primary-dark:  var(--red-700);
+  --color-primary-light: var(--red-100);
+  --color-primary-muted: var(--red-50);
+
+  /* Sidebar */
+  --sidebar-bg:     #18181B;
+  --sidebar-border: #27272A;
+  --sidebar-muted:  #52525B;
+  --sidebar-text:   #A1A1AA;
+  --sidebar-active: #FAFAFA;
+}
+
+/* ─── Reset ──────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #D4D4D8; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #A1A1AA; }
+
+/* ─── Focus ──────────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--red-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Sidebar active indicator ───────────────────────────────────────────── */
+.sidebar-item-active::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 3px; height: 18px;
+  background: var(--red-500);
+  border-radius: 0 4px 4px 0;
+}
+
+/* ─── Animations ─────────────────────────────────────────────────────────── */
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.page-enter { animation: page-enter 300ms cubic-bezier(0.4, 0, 0.2, 1) both; }
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up { animation: slide-up 220ms cubic-bezier(0.4, 0, 0.2, 1) both; }
+
+/* Staggered card entrance */
+.stagger > * { animation: page-enter 320ms cubic-bezier(0.4, 0, 0.2, 1) both; }
+.stagger > *:nth-child(1) { animation-delay: 0ms;   }
+.stagger > *:nth-child(2) { animation-delay: 70ms;  }
+.stagger > *:nth-child(3) { animation-delay: 140ms; }
+.stagger > *:nth-child(4) { animation-delay: 210ms; }
+.stagger > *:nth-child(5) { animation-delay: 280ms; }
+.stagger > *:nth-child(6) { animation-delay: 350ms; }
+
+/* ─── Skeleton shimmer ───────────────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -500px 0; }
+  100% { background-position:  500px 0; }
+}
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #F4F4F5 25%,
+    #EBEBED 50%,
+    #F4F4F5 75%
+  );
+  background-size: 500px 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+  border-radius: 6px;
+}
+
+/* ─── Live pulse dot ─────────────────────────────────────────────────────── */
+@keyframes live-pulse {
+  0%, 100% { opacity: 1;   transform: scale(1);    }
+  50%       { opacity: 0.7; transform: scale(1.25); }
+}
+.glucose-dot-live { animation: live-pulse 2s ease-in-out infinite; }
+
+/* ─── Utilities ──────────────────────────────────────────────────────────── */
+.font-mono    { font-family: 'DM Mono', monospace; }
+.tabular-nums { font-variant-numeric: tabular-nums; }
+
+.card-base {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.04);
+}
