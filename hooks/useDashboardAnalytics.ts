@@ -1,20 +1,20 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { subDays, formatISO } from "date-fns";
-import { analyticsService } from "@/services/api/analytics.service";
-import { QUERY_KEYS, POLLING } from "@/lib/constants";
 
-export function useDashboardAnalytics(rangeDays = 7) {
-  const params = {
-    from: formatISO(subDays(new Date(), rangeDays), { representation: "date" }),
-    to:   formatISO(new Date(),                     { representation: "date" }),
-  };
-
+export function useDashboardAnalytics() {
   return useQuery({
-    queryKey:        QUERY_KEYS.ANALYTICS(params),
-    queryFn:         () => analyticsService.getDashboard(params),
-    refetchInterval: POLLING.DASHBOARD,
-    staleTime:       15_000,
+    queryKey: ["dashboard-analytics"],
+    queryFn: async () => {
+      await new Promise((res) => setTimeout(res, 400));
+
+      return {
+        average: 120,
+        min: 85,
+        max: 160,
+        timeInRange: 78, // %
+        variability: 15,
+      };
+    },
   });
 }

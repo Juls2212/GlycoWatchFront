@@ -1,14 +1,27 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { alertsService } from "@/services/api/alerts.service";
-import { QUERY_KEYS, POLLING } from "@/lib/constants";
 
-export function useRecentAlerts(size = 4) {
+export function useRecentAlerts() {
   return useQuery({
-    queryKey:        QUERY_KEYS.ALERTS({ size, page: 0 }),
-    queryFn:         () => alertsService.getList({ page: 0, size }),
-    refetchInterval: POLLING.ALERTS,
-    staleTime:       30_000,
+    queryKey: ["recent-alerts"],
+    queryFn: async () => {
+      await new Promise((res) => setTimeout(res, 300));
+
+      return [
+        {
+          id: "1",
+          type: "HIGH",
+          message: "Glucosa alta detectada",
+          createdAt: new Date().toISOString(),
+        },
+        {
+          id: "2",
+          type: "LOW",
+          message: "Glucosa baja detectada",
+          createdAt: new Date(Date.now() - 600000).toISOString(),
+        },
+      ];
+    },
   });
 }

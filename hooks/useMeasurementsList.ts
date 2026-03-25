@@ -1,33 +1,36 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { subDays, formatISO } from "date-fns";
-import { measurementsService } from "@/services/api/measurements.service";
-import { QUERY_KEYS, POLLING } from "@/lib/constants";
-import type { MeasurementQueryParams } from "@/types/api.types";
+import type { MeasurementDTO } from "@/types/measurement.types";
 
-interface UseMeasurementsListOptions {
-  rangeDays?: number; // 1 = today, 7 = last 7 days, 30 = last 30 days
-  page?:      number;
-  size?:      number;
-}
-
-export function useMeasurementsList({
-  rangeDays = 7,
-  page      = 0,
-  size      = 200, // high limit for chart rendering
-}: UseMeasurementsListOptions = {}) {
-  const params: MeasurementQueryParams = {
-    from: formatISO(subDays(new Date(), rangeDays), { representation: "date" }),
-    to:   formatISO(new Date(),                     { representation: "date" }),
-    page,
-    size,
-  };
-
+export function useMeasurementsList() {
   return useQuery({
-    queryKey:        QUERY_KEYS.MEASUREMENTS(params),
-    queryFn:         () => measurementsService.getList(params),
-    refetchInterval: POLLING.DASHBOARD,
-    staleTime:       15_000,
+    queryKey: ["measurements"],
+    queryFn: async (): Promise<MeasurementDTO[]> => {
+      await new Promise((res) => setTimeout(res, 400));
+
+      return [
+        {
+          id: "1",
+          value: 110,
+          timestamp: new Date().toISOString(),
+        },
+        {
+          id: "2",
+          value: 135,
+          timestamp: new Date(Date.now() - 3600000).toISOString(),
+        },
+        {
+          id: "3",
+          value: 95,
+          timestamp: new Date(Date.now() - 7200000).toISOString(),
+        },
+        {
+          id: "4",
+          value: 140,
+          timestamp: new Date(Date.now() - 10800000).toISOString(),
+        },
+      ];
+    },
   });
 }

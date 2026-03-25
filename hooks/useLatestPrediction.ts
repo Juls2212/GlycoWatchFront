@@ -1,14 +1,20 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { predictionsService } from "@/services/api/predictions.service";
-import { QUERY_KEYS } from "@/lib/constants";
 
 export function useLatestPrediction() {
   return useQuery({
-    queryKey: QUERY_KEYS.PREDICTION_LATEST,
-    queryFn:  () => predictionsService.getLatest(),
-    staleTime: 5 * 60_000, // predictions change less frequently
-    retry:    1,
+    queryKey: ["latest-prediction"],
+    queryFn: async () => {
+      await new Promise((res) => setTimeout(res, 400));
+
+      return {
+        riskLevel: "HIGH",
+        score: 78,
+        message: "Riesgo elevado de hiperglucemia",
+        createdAt: new Date().toISOString(),
+      };
+    },
+    refetchInterval: 10000,
   });
 }
