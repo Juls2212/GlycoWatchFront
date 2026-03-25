@@ -112,17 +112,6 @@ export function AuthLayout({
 
           {/* Form slot */}
           {children}
-
-          {/* Footer link */}
-          <p className="mt-6 text-center text-[13px] text-slate-500">
-            {footerText}{" "}
-            <Link
-              href={footerLink}
-              className="text-primary-600 font-semibold hover:text-primary-700 transition-colors"
-            >
-              {footerLabel}
-            </Link>
-          </p>
         </div>
       </div>
     </div>

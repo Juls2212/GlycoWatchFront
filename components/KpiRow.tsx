@@ -25,7 +25,7 @@ export function KpiRow() {
     <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 stagger">
       <KpiCard
         label="Promedio 7d"
-        value={data ? data.average.toFixed(1) : "—"}
+        value={data?.stdDev !== undefined ? data.stdDev.toFixed(1) : "—"}
         unit="mg/dL"
         icon={Activity}
         variant="primary"
@@ -60,7 +60,7 @@ export function KpiRow() {
 
       <KpiCard
         label="Variabilidad (DS)"
-        value={data ? data.stdDev.toFixed(1) : "—"}
+        value={data?.stdDev !== undefined ? data.stdDev.toFixed(1) : "—"}
         unit="mg/dL"
         icon={BarChart2}
         variant={stdDevVariant}

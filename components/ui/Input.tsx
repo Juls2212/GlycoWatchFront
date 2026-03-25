@@ -4,11 +4,11 @@ import { Eye, EyeOff } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label?:      string;
-  error?:      string;
-  hint?:       string;
-  leftIcon?:   LucideIcon;
-  className?:  string;
+  label?: string;
+  error?: string;
+  hint?: string;
+  leftIcon?: LucideIcon;
+  className?: string;
   wrapperClassName?: string;
 }
 
@@ -29,10 +29,18 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     ref
   ) => {
     const [showPassword, setShowPassword] = useState(false);
-    const isPassword  = type === "password";
-    const inputType   = isPassword ? (showPassword ? "text" : "password") : type;
-    const inputId     = id ?? (label ? label.toLowerCase().replace(/\s+/g, "-") : undefined);
-    const hasError    = Boolean(error);
+
+    const isPassword = type === "password";
+    const inputType = isPassword
+      ? showPassword
+        ? "text"
+        : "password"
+      : type;
+
+    const inputId =
+      id ?? (label ? label.toLowerCase().replace(/\s+/g, "-") : undefined);
+
+    const hasError = Boolean(error);
 
     return (
       <div className={cn("flex flex-col gap-1.5", wrapperClassName)}>
@@ -40,7 +48,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className="text-[13px] font-medium text-slate-700 select-none"
+            className="text-[13px] font-medium text-slate-700"
           >
             {label}
           </label>
@@ -50,15 +58,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         <div className="relative">
           {/* Left icon */}
           {LeftIcon && (
-            <span className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
               <LeftIcon
                 className={cn(
                   "w-4 h-4",
                   hasError ? "text-red-400" : "text-slate-400"
                 )}
-                strokeWidth={1.8}
               />
-            </span>
+            </div>
           )}
 
           <input
@@ -68,34 +75,34 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             disabled={disabled}
             aria-invalid={hasError}
             aria-describedby={
-              error ? `${inputId}-error` : hint ? `${inputId}-hint` : undefined
+              error
+                ? `${inputId}-error`
+                : hint
+                ? `${inputId}-hint`
+                : undefined
             }
             className={cn(
-              // Base
-              "w-full rounded-lg border bg-white text-slate-900 text-[14px]",
+              "w-full rounded-lg border bg-white text-slate-900 text-sm",
               "placeholder:text-slate-400",
-              "transition-all duration-150",
-              "outline-none",
-              // Padding
+              "transition-all duration-150 outline-none",
+
+              // Padding fix
               "py-2.5",
-              LeftIcon  ? "pl-10 pr-3" : "px-3.5",
+              LeftIcon ? "pl-10 pr-3" : "px-3.5",
               isPassword ? "pr-10" : "",
 
-              // Default state
-              !hasError && !disabled && [
-                "border-slate-200",
-                "focus:border-primary-500 focus:ring-3 focus:ring-primary-500/10",
-                "hover:border-slate-300",
-              ],
+              // Normal
+              !hasError &&
+                !disabled &&
+                "border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 hover:border-slate-300",
 
-              // Error state
-              hasError && [
-                "border-red-300 bg-red-50/30",
-                "focus:border-red-400 focus:ring-3 focus:ring-red-400/10",
-              ],
+              // Error
+              hasError &&
+                "border-red-300 bg-red-50 focus:border-red-400 focus:ring-2 focus:ring-red-400/20",
 
               // Disabled
-              disabled && "bg-slate-50 text-slate-400 cursor-not-allowed border-slate-200",
+              disabled &&
+                "bg-slate-50 text-slate-400 cursor-not-allowed border-slate-200",
 
               className
             )}
@@ -108,30 +115,30 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               type="button"
               tabIndex={-1}
               onClick={() => setShowPassword((v) => !v)}
-              className="absolute inset-y-0 right-3 flex items-center text-slate-400 hover:text-slate-600 transition-colors"
-              aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
             >
-              {showPassword
-                ? <EyeOff className="w-4 h-4" strokeWidth={1.8} />
-                : <Eye    className="w-4 h-4" strokeWidth={1.8} />
-              }
+              {showPassword ? (
+                <EyeOff className="w-4 h-4" />
+              ) : (
+                <Eye className="w-4 h-4" />
+              )}
             </button>
           )}
         </div>
 
-        {/* Error / hint */}
+        {/* Error */}
         {error && (
           <p
             id={`${inputId}-error`}
-            role="alert"
-            className="flex items-center gap-1.5 text-[12px] text-red-600 font-medium"
+            className="text-xs text-red-600 font-medium"
           >
-            <span className="w-1 h-1 rounded-full bg-red-500 flex-shrink-0" />
             {error}
           </p>
         )}
+
+        {/* Hint */}
         {hint && !error && (
-          <p id={`${inputId}-hint`} className="text-[12px] text-slate-400">
+          <p id={`${inputId}-hint`} className="text-xs text-slate-400">
             {hint}
           </p>
         )}

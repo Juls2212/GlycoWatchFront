@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Mail, Lock } from "lucide-react";
+import Link from "next/link";
+
 import { Input }       from "@/components/ui/Input";
 import { Button }      from "@/components/ui/Button";
 import { AlertBanner } from "./AlertBanner";
@@ -40,7 +42,7 @@ export function LoginForm() {
       className="space-y-4"
       aria-label="Formulario de inicio de sesión"
     >
-      {/* API error banner */}
+      {/* Error API */}
       {errorMessage && (
         <AlertBanner
           variant="error"
@@ -82,6 +84,17 @@ export function LoginForm() {
       >
         {login.isPending ? "Iniciando sesión..." : "Iniciar sesión"}
       </Button>
+
+      {/*REGISTER LINK*/}
+      <p className="text-sm text-center mt-4 text-zinc-600">
+        ¿No tienes cuenta?{" "}
+        <Link
+          href="/register"
+          className="text-primary-600 font-semibold hover:underline"
+        >
+          Regístrate gratis
+        </Link>
+      </p>
     </form>
   );
 }
