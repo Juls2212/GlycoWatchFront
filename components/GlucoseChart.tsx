@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 import { Card, CardHeader } from "@/components/ui/Card";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { GLUCOSE_DEFAULTS } from "@/lib/constants";
-import { useMeasurementsList } from "@/features/measurements/hooks/useMeasurementsList";
+import { useMeasurementsList } from "@/hooks/useMeasurementsList";
 import type { MeasurementDTO } from "@/types/measurement.types";
 
 // ─── Range tabs ───────────────────────────────────────────────────────────────
