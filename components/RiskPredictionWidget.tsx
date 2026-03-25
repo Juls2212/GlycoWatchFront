@@ -5,7 +5,7 @@ import Link from "next/link";
 import { cn, formatRelative } from "@/lib/utils";
 import { Card, CardHeader } from "@/components/ui/Card";
 import { Skeleton } from "@/components/ui/Skeleton";
-import { useLatestPrediction } from "@/features/predictions/hooks/useLatestPrediction";
+import { useLatestPrediction } from "@/hooks/useLatestPrediction";
 import type { RiskLevel } from "@/types/analytics.types";
 
 // ─── Risk config ──────────────────────────────────────────────────────────────

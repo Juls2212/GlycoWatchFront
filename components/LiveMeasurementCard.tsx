@@ -5,7 +5,7 @@ import { cn, formatRelative } from "@/lib/utils";
 import { classifyGlucose } from "@/types/measurement.types";
 import { GLUCOSE_DEFAULTS } from "@/lib/constants";
 import { Skeleton } from "@/components/ui/Skeleton";
-import { useLatestMeasurement } from "@/features/measurements/hooks/useLatestMeasurement";
+import { useLatestMeasurement } from "@/hooks/useLatestMeasurement";
 
 // ─── Level config ─────────────────────────────────────────────────────────────
 const LEVEL_CONFIG = {

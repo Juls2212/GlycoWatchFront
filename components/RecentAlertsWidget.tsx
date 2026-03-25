@@ -6,8 +6,7 @@ import Link from "next/link";
 import { cn, formatRelative } from "@/lib/utils";
 import { Card, CardHeader } from "@/components/ui/Card";
 import { Skeleton } from "@/components/ui/Skeleton";
-import { alertsService } from "@/services/api/alerts.service";
-import { useRecentAlerts } from "@/features/alerts/hooks/useRecentAlerts";
+import { useRecentAlerts } from "@/hooks/useRecentAlerts";
 import type { AlertDTO, AlertType } from "@/types/alert.types";
 
 // ─── Type config ──────────────────────────────────────────────────────────────
