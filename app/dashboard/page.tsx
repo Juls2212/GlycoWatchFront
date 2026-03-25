@@ -1,24 +1,24 @@
 "use client";
 
 import { useEffect } from "react";
-import { KpiRow }               from "@/features/dashboard/components/KpiRow";
-import { GlucoseChart }         from "@/features/dashboard/components/GlucoseChart";
-import { LiveMeasurementCard }  from "@/features/dashboard/components/LiveMeasurementCard";
-import { RecentAlertsWidget }   from "@/features/dashboard/components/RecentAlertsWidget";
-import { RiskPredictionWidget } from "@/features/dashboard/components/RiskPredictionWidget";
+import { KpiRow }               from "@/components/KpiRow";
+import { GlucoseChart }         from "@/components/GlucoseChart";
+import { LiveMeasurementCard }  from "@/components/LiveMeasurementCard";
+import { RecentAlertsWidget }   from "@/components/RecentAlertsWidget";
+import { RiskPredictionWidget } from "@/components/RiskPredictionWidget";
 import { useLayoutContext }     from "@/components/layout/DashboardLayout";
-import { useLatestMeasurement } from "@/features/measurements/hooks/useLatestMeasurement";
+import { useLatestMeasurement } from "@/hooks/useLatestMeasurement";
 
 export default function DashboardPage() {
   const { setLastUpdated, setIsRefreshing } = useLayoutContext();
   const { data: latest, isFetching }        = useLatestMeasurement();
 
-  // Sync latest timestamp → header "last updated" pill
+  // header "last updated" pill
   useEffect(() => {
     if (latest?.measuredAt) setLastUpdated(latest.measuredAt);
   }, [latest?.measuredAt, setLastUpdated]);
 
-  // Sync fetch state → header refresh spinner
+  // header refresh spinner
   useEffect(() => {
     setIsRefreshing(isFetching);
   }, [isFetching, setIsRefreshing]);
